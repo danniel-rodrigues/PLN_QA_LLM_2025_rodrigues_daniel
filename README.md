@@ -28,6 +28,10 @@ da relação das principais tabelas do DATASUS e elaboração do tutorial da ati
 **josé Clenildo** - Busca de modelos na plataforma Huggind Face, colaboração no código para leitura e estruturação
 do arquivo sobre doenças respiratórias crônicas.
 
+### Vídeo da atividade
+
+[Vídeo sobre a atividade proposta](https://drive.google.com/file/d/1RalnLWhka8eRplymGGrGhifa2uqg3Qrx/view?usp=sharing)
+
 ## Modelos de LLMs selecionados para a atividade
 - [mDeBERTa-v3-base-squad2](https://huggingface.co/timpal0l/mdeberta-v3-base-squad2)
 - [Google-bert (Large uncased)](https://huggingface.co/google-bert/bert-large-uncased)
