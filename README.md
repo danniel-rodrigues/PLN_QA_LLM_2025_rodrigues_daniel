@@ -151,3 +151,7 @@ entitulado como ```perguntas_e_respostas_atividade.ipynb```. Para cada pergunta,
 2) reclassifica esses trechos usando um modelo cross-encoder para selecionar o mais pertinente,
 3) envia a pergunta e o contexto selecionado para múltiplos modelos de QA da Hugging Face e
 4) imprime as respostas com suas pontuações, registrando também o tempo gasto em cada consulta.
+
+As repostas entregues pelos LLMs escolhidos tiveram confiabilidade baixa nas respostas de todas as perguntas selecionadas, e não o retorno dos modelos não foi o esperado.
+Isto pode ser devido a forma como as perguntas foram feitas, a complexidade das perguntas em relação ao tamanho do modelo, considerando que eles são modelos pequenos, e a capacidade do modelo de buscar nos dados entregues onde se encontra a resposta.
+A estruturação dos dados poderia influenciar, mas como foi dito anteriormente, os arquivos foram transformados e estruturados de forma correta, logo não será considerada essa opção.
