@@ -43,7 +43,7 @@ do arquivo sobre doenças respiratórias crônicas.
 !pip install PyMuPDF python-docx sentence-transformers faiss-cpu "pypdf>=3.0.0" "transformers>=4.0.0" "torch>=2.0.0" requests
 ```
 2 - Após a instalação das ferramentas necessárias, é necessário fazer as devidas importações:
-```bash
+```python
 import os
 import requests
 import numpy as np
@@ -65,7 +65,7 @@ desnecessárias e divide o conteúdo em sentenças. Em seguida, essas sentenças
 blocos (chunks) de quatro frases, com sobreposição de uma sentença entre eles, garantindo continuidade no contexto.
 Cada chunk só é armazenado se tiver mais de 10 palavras, sendo salvo junto com metadados básicos. Ao final, a função
 retorna uma lista desses chunks processados, prontos para uso na tarefa de perguntas e respostas.
-```bash
+```python
 def processar_pdf_com_sentencas(caminho_arquivo):
     """Extrai texto de PDF, dividindo em sentenças e agrupando-as em chunks focados."""
     print("1/4 - Processando PDF com PyMuPDF (chunking por sentenças)...")
@@ -94,7 +94,7 @@ associando-o aos dados extraídos. Para cada linha da tabela (ignorando o cabeç
 descrição e, se houver, os domínios ou valores possíveis. Essas informações são transformadas em frases descritivas e 
 armazenadas em chunks com metadados. No fim, a função retorna todos esses chunks, já contextualizados para facilitar na
 tarefa de perguntas e respostas.
-```bash
+```python
 def processar_docx_com_contexto_tabela(caminho_arquivo):
     """Extrai dados de tabelas de um DOCX, adicionando o nome da tabela como contexto."""
     print("1/4 - Processando DOCX com python-docx (com contexto de tabela)...")
