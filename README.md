@@ -33,10 +33,21 @@ do arquivo sobre doenças respiratórias crônicas.
 [Vídeo sobre a atividade proposta](https://drive.google.com/file/d/1RalnLWhka8eRplymGGrGhifa2uqg3Qrx/view?usp=sharing)
 
 ## Modelos de LLMs selecionados para a atividade
-- [mDeBERTa-v3-base-squad2](https://huggingface.co/timpal0l/mdeberta-v3-base-squad2)
-- [Google-bert (Large uncased)](https://huggingface.co/google-bert/bert-large-uncased)
-- [RoBERTa-base-squad2](https://huggingface.co/deepset/roberta-base-squad2)
+- [mDeBERTa-v3-base-squad2](https://huggingface.co/timpal0l/mdeberta-v3-base-squad2) - 278M de parâmetros
+- [Google-bert (Large uncased)](https://huggingface.co/google-bert/bert-large-uncased) - 336M de parâmetros
+- [RoBERTa-base-squad2](https://huggingface.co/deepset/roberta-base-squad2) - 124M de parâmetros
 
+## Perguntas escolhidas para cada arquivo
+### Doenças respiratórias crônicas (PDF):
+- "Estou sentindo falta de ar, tossindo e com dor no peito. Qual doença possui esses sintomas?"
+- "Quais são os sintomas da rinite alérgica?"
+- "Como posso determinar se tenho alguma doença respiratória crônica?"
+
+### Relação das principais tabelas do DATASUS (Docx):
+- "Qual a descrição e os domínios do campo STATUSMOV na tabela de estabelecimentos de saúde?"
+- "Qual a descrição do campo NSLAQCDURA na tabela de quimioterapia e radioterapia?"
+- "Qual a descrição da tabela LFCES008?"
+  
 ## Configuração do ambiente Google Colab Notebook
 1 - Primeiramente é necessário realizar a instalação de todas as ferramentas que serão utilizadas:
 ```bash
@@ -152,9 +163,11 @@ entitulado como ```perguntas_e_respostas_atividade.ipynb```. Para cada pergunta,
 3) envia a pergunta e o contexto selecionado para múltiplos modelos de QA da Hugging Face e
 4) imprime as respostas com suas pontuações, registrando também o tempo gasto em cada consulta.
 
-## Conclusão
-Devido à estratégia adotada no pré-processamento dos arquivos de contexto, o cálculo de similaridade entre o conteúdo dos arquivos e as perguntas resultava na seleção apenas dos três chunks com maior pontuação, descartando os demais. Entretanto, esses trechos eliminados poderiam conter informações relevantes para auxiliar os modelos na elaboração das respostas.
+## Conclusão sobre a atividade
+No processo de pré-processamento adotado inicialmente, a similaridade entre os arquivos de contexto e as perguntas era calculada de forma direta, o que resultava na seleção apenas dos três chunks mais próximos, descartando todos os demais. Essa estratégia, embora simplificasse o processamento, apresentava uma limitação significativa: trechos potencialmente relevantes eram ignorados, comprometendo a riqueza de informações disponíveis para os modelos.
 
-Esse problema ocorria porque o cálculo de similaridade era realizado de forma pouco criteriosa, considerando apenas a distância textual entre perguntas e trechos, sem uma base semântica consistente. Assim, a análise das respostas fornecidas pelos modelos tornava-se inviável, já que a perda de dados comprometia significativamente a precisão.
+Esse problema ocorria porque o cálculo da similaridade era realizado de maneira superficial, comparando as perguntas com o texto em uma métrica puramente de distância, sem considerar adequadamente o significado semântico do conteúdo. Ou seja, a comparação era feita de forma “às cegas”, sem que houvesse uma representação vetorial que capturasse os conceitos e relações presentes nos dados. Como consequência, a qualidade das respostas geradas pelos modelos era fortemente impactada, uma vez que informações importantes eram descartadas antes mesmo da fase de inferência.
 
-Para que o pré-processamento fosse conduzido de maneira adequada, seria necessário converter o conteúdo dos arquivos em embeddings e, a partir deles, realizar o cálculo de similaridade, assegurando que todos os dados fossem preservados, mesmo os aparentemente menos relevantes.
+Dessa forma, a análise das respostas tornava-se inviável, já que os modelos não dispunham de um conjunto de informações suficientemente representativo. O resultado era a produção de respostas pouco precisas, inconsistentes ou incompletas.
+
+Para superar essa limitação, seria necessário realizar o pré-processamento de maneira mais robusta, convertendo os textos em representações vetoriais (embeddings). A partir desses embeddings, seria possível calcular a similaridade semântica entre os trechos e as perguntas, preservando todos os dados, inclusive aqueles inicialmente considerados menos relevantes. Essa abordagem não apenas aumentaria a precisão das respostas, mas também garantiria que o modelo tivesse acesso a um espectro mais amplo de informações, o que é fundamental para análises mais confiáveis e contextualizadas.
