@@ -152,6 +152,9 @@ entitulado como ```perguntas_e_respostas_atividade.ipynb```. Para cada pergunta,
 3) envia a pergunta e o contexto selecionado para múltiplos modelos de QA da Hugging Face e
 4) imprime as respostas com suas pontuações, registrando também o tempo gasto em cada consulta.
 
-As repostas entregues pelos LLMs escolhidos tiveram confiabilidade baixa nas respostas de todas as perguntas selecionadas, e não o retorno dos modelos não foi o esperado.
-Isto pode ser devido a forma como as perguntas foram feitas, a complexidade das perguntas em relação ao tamanho do modelo, considerando que eles são modelos pequenos, e a capacidade do modelo de buscar nos dados entregues onde se encontra a resposta.
-A estruturação dos dados poderia influenciar, mas como foi dito anteriormente, os arquivos foram transformados e estruturados de forma correta, logo não será considerada essa opção.
+## Conclusão
+Devido à estratégia adotada no pré-processamento dos arquivos de contexto, o cálculo de similaridade entre o conteúdo dos arquivos e as perguntas resultava na seleção apenas dos três chunks com maior pontuação, descartando os demais. Entretanto, esses trechos eliminados poderiam conter informações relevantes para auxiliar os modelos na elaboração das respostas.
+
+Esse problema ocorria porque o cálculo de similaridade era realizado de forma pouco criteriosa, considerando apenas a distância textual entre perguntas e trechos, sem uma base semântica consistente. Assim, a análise das respostas fornecidas pelos modelos tornava-se inviável, já que a perda de dados comprometia significativamente a precisão.
+
+Para que o pré-processamento fosse conduzido de maneira adequada, seria necessário converter o conteúdo dos arquivos em embeddings e, a partir deles, realizar o cálculo de similaridade, assegurando que todos os dados fossem preservados, mesmo os aparentemente menos relevantes.
